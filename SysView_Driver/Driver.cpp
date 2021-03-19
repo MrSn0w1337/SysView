@@ -5,6 +5,7 @@ UNICODE_STRING Dos = RTL_CONSTANT_STRING(L"\\DosDevices\\SysView");
 PSYSVIEW SysView = nullptr;
 
 extern "C" NTSTATUS DriverUnload(PDRIVER_OBJECT pDriverObject);
+
 extern "C" NTSTATUS DriverEntry(PDRIVER_OBJECT pDriverObject, PUNICODE_STRING pRegistryPath)
 {	
 	UNREFERENCED_PARAMETER(pRegistryPath);
