@@ -11,7 +11,6 @@ typedef class CSysList
 		MODULE,
 		DRIVER,
 		BLACKLIST,
-		PROTECT,
 		THREAD
 	};
 
