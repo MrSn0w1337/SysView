@@ -33,7 +33,6 @@ typedef struct _LIST_PROCESS
 	ULONG ThreadsCount;
 	HANDLE PID;
 	bool IsSuspended;
-	bool IsProtected;
 	bool IsWow64;
 
 	_LIST_PROCESS* Next;
@@ -83,12 +82,6 @@ typedef struct _LIST_DATA
 	void* buffer; //Buffer to PDRIVER_LIST array/vector
 	HANDLE PID; //PID for GetThreadList
 }LIST_DATA, * PLIST_DATA;
-
-typedef struct _DATA_PROTECT
-{
-	bool bRemove;
-	HANDLE PID;
-}DATA_PROTECT, * PDATA_PROTECT;
 
 typedef struct _DATA_BLACKLIST
 {
