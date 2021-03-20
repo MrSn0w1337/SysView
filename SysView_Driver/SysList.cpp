@@ -28,8 +28,6 @@ PLIST_MODULE CSysList::ModuleHead;
 PLIST_MODULE CSysList::ModuleLast;
 PLIST_BLACKLIST CSysList::BlacklistHead;
 PLIST_BLACKLIST CSysList::BlacklistLast;
-PLIST_PROTECT CSysList::ProtectHead;
-PLIST_PROTECT CSysList::ProtectLast;
 PLIST_DRIVER CSysList::DriverHead;
 PLIST_DRIVER CSysList::DriverLast;
 
@@ -43,15 +41,12 @@ CSysList::CSysList()
 	CSysList::ModuleLast = nullptr;
 	CSysList::BlacklistHead = nullptr;
 	CSysList::BlacklistLast = nullptr;
-	CSysList::ProtectHead = nullptr;
-	CSysList::ProtectLast = nullptr;
 	CSysList::DriverHead = nullptr;
 	CSysList::DriverLast = nullptr;
 }
 
 CSysList::~CSysList()
 {
-	CSysList::Erease(ID::PROTECT);
 	CSysList::Erease(ID::BLACKLIST);
 }
 
@@ -108,27 +103,6 @@ void CSysList::Insert(void* pEntry, USHORT ID)
 		tmpDriver->Last = CSysList::DriverLast;
 		CSysList::DriverLast->Next = tmpDriver;
 		CSysList::DriverLast = tmpDriver;
-	}
-	else if (ID == ID::PROTECT)
-	{
-		auto tmpProtect = (PLIST_PROTECT)CSysList::Alloc(sizeof(LIST_PROTECT), NonPagedPool, TAG::PROTECT);
-		if (!tmpProtect)
-			return;
-
-		RtlCopyMemory(tmpProtect, pEntry, sizeof(LIST_PROTECT));
-
-		if (!CSysList::ProtectLast)
-		{
-			tmpProtect->Next = nullptr;
-			CSysList::ProtectHead = tmpProtect;
-			CSysList::ProtectLast = tmpProtect;
-			return;
-		}
-
-		tmpProtect->Next = nullptr;
-		tmpProtect->Last = CSysList::ProtectLast;
-		CSysList::ProtectLast->Next = tmpProtect;
-		CSysList::ProtectLast = tmpProtect;
 	}
 	else if (ID == ID::BLACKLIST)
 	{
@@ -220,16 +194,6 @@ void CSysList::Erease(USHORT ID)
 			currDriverEntry = nextEntry;
 		}
 	}
-	else if (ID == ID::PROTECT)
-	{
-		auto currProtectEntry = CSysList::ProtectHead;
-		while (currProtectEntry)
-		{
-			auto nextEntry = currProtectEntry->Next;
-			CSysList::Free(currProtectEntry, TAG::PROTECT);
-			currProtectEntry = nextEntry;
-		}
-	}
 	else if (ID == ID::BLACKLIST)
 	{
 		auto currBlacklistEntry = CSysList::BlacklistHead;
@@ -288,15 +252,6 @@ ULONG CSysList::GetCount(USHORT ID)
 		{
 			ListCount++;
 			currDriverEntry = currDriverEntry->Next;
-		}
-	}
-	else if (ID == PROTECT)
-	{
-		auto currProtectEntry = CSysList::ProtectHead;
-		while (currProtectEntry)
-		{
-			ListCount++;
-			currProtectEntry = currProtectEntry->Next;
 		}
 	}
 	else if (ID == BLACKLIST)
@@ -471,40 +426,6 @@ void CSysList::Remove(void* Entry, USHORT ID)
 			currDriverEntry = currDriverEntry->Next;
 		}
 	}
-	else if (ID == ID::PROTECT)
-	{
-		auto ProcID = *(PHANDLE)Entry;
-		auto currProtectEntry = CSysList::ProtectHead;
-		while (currProtectEntry)
-		{
-			if (currProtectEntry->PID == ProcID)
-			{
-				auto NodeLast = currProtectEntry->Last;
-				auto NodeNext = currProtectEntry->Next;
-
-				if (!NodeNext)
-				{
-					NodeLast->Next = nullptr;
-					CSysList::ProtectLast = NodeLast;
-				}
-				else if (!NodeLast)
-				{
-					NodeNext->Last = nullptr;
-					CSysList::ProtectHead = NodeNext;
-				}
-				else
-				{
-					NodeLast->Next = NodeNext;
-					NodeNext->Last = NodeLast;
-				}
-
-				CSysList::Free(currProtectEntry, TAG::PROTECT);
-				currProtectEntry = nullptr;
-				break;
-			}
-			currProtectEntry = currProtectEntry->Next;
-		}
-	}
 	else if (ID == ID::BLACKLIST)
 	{
 		auto wName = (wchar_t*)Entry;
@@ -616,8 +537,6 @@ void* CSysList::GetHead(USHORT ID)
 	{
 	case ID::BLACKLIST:
 		return CSysList::BlacklistHead;
-	case ID::PROTECT:
-		return CSysList::ProtectHead;
 	case ID::DRIVER:
 		return CSysList::DriverHead;
 	case ID::MODULE:
@@ -637,8 +556,6 @@ void* CSysList::GetLast(USHORT ID)
 	{
 	case ID::BLACKLIST:
 		return CSysList::BlacklistLast;
-	case ID::PROTECT:
-		return CSysList::ProtectLast;
 	case ID::DRIVER:
 		return CSysList::DriverLast;
 	case ID::MODULE:
@@ -659,9 +576,6 @@ void CSysList::SetHead(USHORT ID, T p)
 	{
 	case ID::BLACKLIST:
 		CSysList::BlacklistHead = p;
-		break;
-	case ID::PROTECT:
-		CSysList::ProtectHead = p;
 		break;
 	case ID::DRIVER:
 		CSysList::DriverHead = p;
@@ -687,9 +601,6 @@ void CSysList::SetLast(USHORT ID, X p)
 	{
 	case ID::BLACKLIST:
 		CSysList::BlacklistLast = p;
-		break;
-	case ID::PROTECT:
-		CSysList::ProtectLast = p;
 		break;
 	case ID::DRIVER:
 		CSysList::DriverLast = p;
