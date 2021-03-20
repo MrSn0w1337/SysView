@@ -24,8 +24,6 @@ protected:
 	static PLIST_MODULE ModuleLast;
 	static PLIST_BLACKLIST BlacklistHead;
 	static PLIST_BLACKLIST BlacklistLast;
-	static PLIST_PROTECT ProtectHead;
-	static PLIST_PROTECT ProtectLast;
 	static PLIST_DRIVER DriverHead;
 	static PLIST_DRIVER DriverLast;
 
