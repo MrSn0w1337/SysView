@@ -1006,7 +1006,6 @@ typedef struct _LIST_PROCESS
     ULONG ThreadsCount;
     HANDLE PID;
     bool IsSuspended;
-    bool IsProtected;
 
     _LIST_PROCESS* Next;
     _LIST_PROCESS* Last;
@@ -1024,13 +1023,6 @@ typedef struct _LIST_THREAD
     _LIST_THREAD* Next;
     _LIST_THREAD* Last;
 } LIST_THREAD, * PLIST_THREAD;
-
-typedef struct _LIST_PROTECT
-{
-    HANDLE PID;
-    _LIST_PROTECT* Next;
-    _LIST_PROTECT* Last;
-}LIST_PROTECT, * PLIST_PROTECT;
 
 typedef struct _LIST_BLACKLIST
 {
@@ -1064,7 +1056,6 @@ enum ID
     PROCESS = 0x1,
     DRIVER,
     THREAD,
-    PROTECT,
     BLACKLIST,
     MODULE
 };
