@@ -6,13 +6,12 @@ typedef class CSysView : public CSysList
 	(HANDLE parentID, HANDLE processID, PPS_CREATE_NOTIFY_INFO notifyInfo);
 
 	static PVOID pObProcHandle;
+	static bool IsBlacklisted(wchar_t* wProc);
 
 public:
 	CSysView(PBOOL IsInit);
 	~CSysView();
 
-	static bool IsProtected(HANDLE PID);
-	static bool IsBlacklisted(wchar_t* wProc);
 	static ULONG GetDriverList(uintptr_t ThreadEntry, char* szModule);
 	static ULONG GetProcessList();
 	static ULONG GetThreadList(HANDLE PID);
