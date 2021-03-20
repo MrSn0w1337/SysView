@@ -294,20 +294,6 @@ bool CSysView::IsBlacklisted(wchar_t* wProc)
 	return false;
 }
 
-bool CSysView::IsProtected(HANDLE PID)
-{
-	auto currProtectedEntry = ProtectHead;
-	while (currProtectedEntry)
-	{
-		if (PID == currProtectedEntry->PID)
-			return true;
-
-		currProtectedEntry = currProtectedEntry->Next;
-	}
-
-	return false;
-}
-
 PCREATE_PROCESS_NOTIFY_ROUTINE_EX CSysView::ProcessNotifyRoutineEx(HANDLE parentID, HANDLE processID, PPS_CREATE_NOTIFY_INFO notifyInfo)
 {
 	if (notifyInfo && BlacklistHead)
