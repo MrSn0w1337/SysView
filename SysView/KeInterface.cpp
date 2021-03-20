@@ -175,7 +175,7 @@ bool CDriver::GetModuleList(HANDLE PID)
 {
 	if (!CDriver::bIsInit || !PID)
 		return false;
-	DWORD t = PAGE_EXECUTE_READWRITE;
+	
 	if (CDriver::vModules.size())
 		CDriver::vModules.clear();
 
