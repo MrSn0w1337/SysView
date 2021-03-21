@@ -10,7 +10,7 @@ namespace SysViewModule {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Zusammenfassung für Modules
+	/// Zusammenfassung fÃ¼r Modules
 	/// </summary>
 	public ref class Modules : public System::Windows::Forms::Form
 	{
@@ -141,7 +141,7 @@ namespace SysViewModule {
 
 		this->modulesListView->Items->Clear();
 		auto modVec = CDriver::GetModuleVector();
-		for (auto x : modVec)
+		for (auto& x : modVec)
 		{
 			auto sModName = gcnew String(x.BaseDllName);
 			auto sPath = gcnew String(x.FullDllName);
