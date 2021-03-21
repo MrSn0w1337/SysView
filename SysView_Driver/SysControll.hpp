@@ -25,12 +25,6 @@ namespace SysControll
 
 	}LIST_DATA, * PLIST_DATA;
 
-	typedef struct _DATA_PROTECT
-	{
-		bool bRemove;
-		HANDLE PID;
-	}DATA_PROTECT, *PDATA_PROTECT;
-
 	typedef struct _DATA_BLACKLIST
 	{
 		bool bRemove;
