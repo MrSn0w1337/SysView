@@ -296,7 +296,7 @@ private: System::Void refreshToolStripMenuItem1_Click(System::Object^ sender, Sy
 	//Clear listview
 	this->processListView->Items->Clear();
 	auto pProcVec = CDriver::GetProcVector();
-	for (auto x : pProcVec)
+	for (auto& x : pProcVec)
 	{
 		auto sName = gcnew String(x.ImageName);
 		auto sPath = gcnew String(x.ImagePath);
@@ -335,7 +335,7 @@ private: System::Void killToolStripMenuItem_Click(System::Object^ sender, System
 	}
 
 	//Refresh list
-	refreshToolStripMenuItem1_Click(sender, e);
+	this->refreshToolStripMenuItem1_Click(sender, e);
 }
 private: System::Void suspendToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) 
 {
@@ -359,7 +359,7 @@ private: System::Void suspendToolStripMenuItem_Click(System::Object^ sender, Sys
 	}
 
 	//Refresh list
-	refreshToolStripMenuItem1_Click(sender, e);
+	this->refreshToolStripMenuItem1_Click(sender, e);
 }
 private: System::Void processStripMenu_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) 
 {
