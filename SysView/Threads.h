@@ -189,7 +189,7 @@ private: System::Void refreshToolStripMenuItem_Click(System::Object^ sender, Sys
 	this->threadListView->Items->Clear();
 	auto vThreads = CDriver::GetThreadVector();
 
-	for (auto x : vThreads)
+	for (auto& x : vThreads)
 	{
 		if (!x.TID)
 			continue;
