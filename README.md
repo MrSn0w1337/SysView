@@ -1,6 +1,8 @@
 # SysView
 An open source windows research tool based on a kernel component
 
+![alt text](http://i.epvpimg.com/LvPDcab.jpg)
+
 Feature Overview:
   - Enumeration of running processes with information (PID, Name, Path, Threads)
   - Enumeration of device drivers with information (Name, Path, Base, Size)
