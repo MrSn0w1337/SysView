@@ -120,7 +120,7 @@ void CDriver::BlockProcess(std::wstring& sProcess, bool Remove)
 	if (Remove)
 	{
 		int index = 0;
-		for (auto x : CDriver::vBlacklistProc)
+		for (auto& x : CDriver::vBlacklistProc)
 		{
 			if (x.compare(sProcess.c_str()) == 0)
 				break;
@@ -136,7 +136,7 @@ void CDriver::BlockProcess(std::wstring& sProcess, bool Remove)
 
 bool CDriver::IsProcessAlreadyBlacklisted(std::wstring& sProcess)
 {
-	for (auto x : CDriver::vBlacklistProc)
+	for (auto& x : CDriver::vBlacklistProc)
 	{
 		if (x.compare(sProcess.c_str()) == 0)
 			return true;
@@ -199,7 +199,7 @@ bool CDriver::GetModuleList(HANDLE PID)
 		return false;
 
 	//Fill vector
-	for (auto x : tmpVector)
+	for (auto& x : tmpVector)
 		CDriver::vModules.push_back(x);
 
 	return true;
@@ -233,7 +233,7 @@ bool CDriver::GetDriverList()
 		return false;
 
 	//Fill vector
-	for (auto x : tmpVector)
+	for (auto& x : tmpVector)
 		CDriver::vDriver.push_back(x);
 
 	return true;
@@ -267,7 +267,7 @@ bool CDriver::GetProcList()
 		return false;
 
 	//Fill vector
-	for (auto x : tmpVector)
+	for (auto& x : tmpVector)
 		CDriver::vProcess.push_back(x);
 
 	return true;
@@ -304,7 +304,7 @@ bool CDriver::GetThreadList(HANDLE PID)
 		return false;
 
 	//Fill vector
-	for (auto y : tmpVector)
+	for (auto& y : tmpVector)
 		CDriver::vThreads.push_back(y);
 
 	return true;
