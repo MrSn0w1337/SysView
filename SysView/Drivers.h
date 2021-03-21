@@ -10,7 +10,7 @@ namespace SysViewDriver {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Zusammenfassung für Drivers
+	/// Zusammenfassung fÃ¼r Drivers
 	/// </summary>
 	public ref class Drivers : public System::Windows::Forms::Form
 	{
@@ -135,7 +135,7 @@ namespace SysViewDriver {
 
 		this->driversListView->Items->Clear();
 		auto pDriverVec = CDriver::GetDriverVector();
-		for (auto x : pDriverVec)
+		for (auto& x : pDriverVec)
 		{
 			auto sName = gcnew String(x.ImageName);
 			auto sPath = gcnew String(x.Path);
