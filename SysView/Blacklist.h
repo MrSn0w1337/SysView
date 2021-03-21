@@ -12,7 +12,7 @@ namespace SysViewBlacklist {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Zusammenfassung für Blacklist
+	/// Zusammenfassung fÃ¼r Blacklist
 	/// </summary>
 	public ref class Blacklist : public System::Windows::Forms::Form
 	{
@@ -21,7 +21,7 @@ namespace SysViewBlacklist {
 		{
 			InitializeComponent();
 			//
-			//TODO: Konstruktorcode hier hinzufügen.
+			//TODO: Konstruktorcode hier hinzufÃ¼gen.
 			//
 		}
 
@@ -52,8 +52,8 @@ namespace SysViewBlacklist {
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Erforderliche Methode für die Designerunterstützung.
-		/// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
+		/// Erforderliche Methode fÃ¼r die DesignerunterstÃ¼tzung.
+		/// Der Inhalt der Methode darf nicht mit dem Code-Editor geÃ¤ndert werden.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -131,7 +131,7 @@ namespace SysViewBlacklist {
 	private: System::Void Blacklist_Load(System::Object^ sender, System::EventArgs^ e) {
 		//Fill listview with current blacklist
 		auto vBlacklist = CDriver::GetBlacklistVector();
-		for (auto x : vBlacklist)
+		for (auto& x : vBlacklist)
 		{
 			auto sProc = gcnew String(x.c_str());
 			this->blacklistListView->Items->Add(sProc);
