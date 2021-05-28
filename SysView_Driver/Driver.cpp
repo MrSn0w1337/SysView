@@ -13,7 +13,10 @@ extern "C" NTSTATUS DriverEntry(PDRIVER_OBJECT pDriverObject, PUNICODE_STRING pR
 	BOOL Init = FALSE;
 	SysView = new (NonPagedPool, SYSVIEW_TAG) CSysView(&Init);
 	if (!SysView || !Init)
+	{
+		SysView ? ExFreePoolWithTag(SysView, SYSVIEW_TAG) : 0;
 		return STATUS_UNSUCCESSFUL;
+	}
 	
 	PDEVICE_OBJECT pDeviceObject = nullptr;
 	IoCreateDevice(pDriverObject, 0, &Dev, FILE_DEVICE_UNKNOWN, FILE_DEVICE_SECURE_OPEN, FALSE, &pDeviceObject);
